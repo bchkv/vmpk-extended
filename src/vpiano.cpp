@@ -1210,9 +1210,10 @@ void VPiano::slotBenderSliderMoved(const int pos)
 
 void VPiano::slotBenderSliderReleased()
 {
-    m_bender->setValue(0);
-    sendBender(0);
-    setWidgetTip(m_bender, 0);
+    // Hold the tuning after release; the Reset action restores concert pitch.
+    const int value = m_bender->value();
+    sendBender(value);
+    setWidgetTip(m_bender, value);
 }
 
 void VPiano::slotAbout()
