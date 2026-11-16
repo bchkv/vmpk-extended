@@ -19,6 +19,7 @@
 #ifndef VPIANO_H
 #define VPIANO_H
 
+#include <QCheckBox>
 #include <QMainWindow>
 #include <QPointer>
 #include <drumstick/pianokeybd.h>
@@ -263,6 +264,7 @@ private:
     QComboBox* m_comboControl;
     QDial* m_Control;
     QSlider* m_bender;
+    QCheckBox* m_holdBender;
     QComboBox* m_comboBank;
     QComboBox* m_comboProg;
     Instrument* m_ins;

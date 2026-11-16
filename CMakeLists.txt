@@ -166,6 +166,7 @@ set(vmpk_DATA_FILES
     data/Serbian-cyr.xml
     data/Serbian-lat.xml
     data/spanish.xml
+    data/macos-qwerty-2.75-octaves.xml
     data/vkeybd-default.xml
     data/txt2ins.awk
 )

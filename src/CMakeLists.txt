@@ -173,6 +173,7 @@ if(APPLE)
         ../data/german.xml
         ../data/azerty.xml
         ../data/it-qwerty.xml
+        ../data/macos-qwerty-2.75-octaves.xml
         ../data/vkeybd-default.xml
         ../data/pc102mac.xml
     )

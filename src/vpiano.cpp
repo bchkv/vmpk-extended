@@ -26,6 +26,7 @@
 #include <QCloseEvent>
 #include <QComboBox>
 #include <QSlider>
+#include <QCheckBox>
 #include <QSpinBox>
 #include <QDial>
 #include <QToolButton>
@@ -416,6 +417,14 @@ void VPiano::initToolBars()
     m_bender->setToolTip("0");
     m_bender->setFocusPolicy(Qt::NoFocus);
     ui.toolBarBender->addWidget(m_bender);
+    m_holdBender = new QCheckBox(this);
+    m_holdBender->setChecked(true);
+    m_holdBender->setFocusPolicy(Qt::NoFocus);
+    ui.toolBarBender->addWidget(m_holdBender);
+    connect(m_holdBender, &QCheckBox::toggled, this, [this](bool hold) {
+        if (!hold)
+            slotResetBender();
+    });
     connect(m_bender, &QAbstractSlider::sliderMoved, this, &VPiano::slotBenderSliderMoved);
     connect(m_bender, &QAbstractSlider::sliderReleased, this, &VPiano::slotBenderSliderReleased);
     // Programs tool bar
@@ -1210,8 +1219,8 @@ void VPiano::slotBenderSliderMoved(const int pos)
 
 void VPiano::slotBenderSliderReleased()
 {
-    // Hold the tuning after release; the Reset action restores concert pitch.
-    const int value = m_bender->value();
+    const int value = m_holdBender->isChecked() ? m_bender->value() : 0;
+    m_bender->setValue(value);
     sendBender(value);
     setWidgetTip(m_bender, value);
 }
@@ -2193,6 +2202,8 @@ void VPiano::retranslateToolbars()
     );
     m_lblBank->setText(tr("Bank:"));
     m_lblBender->setText(tr("Bender:"));
+    m_holdBender->setText(tr("Hold"));
+    m_holdBender->setToolTip(tr("Keep the pitch bend when released. Uncheck to return to centre."));
     m_lblControl->setText(tr("Control:"));
     m_lblProgram->setText(tr("Program:"));
     m_lblValue->setText(tr("Value:"));

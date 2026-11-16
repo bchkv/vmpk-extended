@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE keyboardmap>
+<keyboardmap version="1.0">
+    <!-- Continuous C through A; note offsets 0–33. -->
+    <mapping key="Z" note="0"/>
+    <mapping key="S" note="1"/>
+    <mapping key="X" note="2"/>
+    <mapping key="D" note="3"/>
+    <mapping key="C" note="4"/>
+    <mapping key="V" note="5"/>
+    <mapping key="G" note="6"/>
+    <mapping key="B" note="7"/>
+    <mapping key="H" note="8"/>
+    <mapping key="N" note="9"/>
+    <mapping key="J" note="10"/>
+    <mapping key="M" note="11"/>
+    <mapping key="Q" note="12"/>
+    <mapping key="2" note="13"/>
+    <mapping key="W" note="14"/>
+    <mapping key="3" note="15"/>
+    <mapping key="E" note="16"/>
+    <mapping key="R" note="17"/>
+    <mapping key="5" note="18"/>
+    <mapping key="T" note="19"/>
+    <mapping key="6" note="20"/>
+    <mapping key="Y" note="21"/>
+    <mapping key="7" note="22"/>
+    <mapping key="U" note="23"/>
+    <mapping key="I" note="24"/>
+    <mapping key="9" note="25"/>
+    <mapping key="O" note="26"/>
+    <mapping key="0" note="27"/>
+    <mapping key="P" note="28"/>
+    <mapping key="[" note="29"/>
+    <mapping key="-" note="30"/>
+    <mapping key="]" note="31"/>
+    <mapping key="=" note="32"/>
+    <mapping key="\" note="33"/>
+</keyboardmap>
