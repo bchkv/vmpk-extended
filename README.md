@@ -20,12 +20,14 @@ Show the Pitch Bender toolbar from the **View** menu if it is hidden.
 
 ### macOS QWERTY keyboard map
 
-[`data/macos-qwerty-2.75-octaves.xml`](data/macos-qwerty-2.75-octaves.xml) maps **34 unique keys** to a continuous range of **33 semitones (2.75 octaves)**, from C through A.
+[`data/macos-qwerty-2.75-octaves.xml`](data/macos-qwerty-2.75-octaves.xml) maps **39 unique keys** to a continuous range of **33 semitones (2.75 octaves)**, from C through A.
 
 | Range | White-note keys | Black-note keys |
 | --- | --- | --- |
-| Lower octave, C–B | Z X C V B N M | S D G H J |
+| Lower range, C–E in the next octave | Z X C V B N M , . / | S D G H J L ; |
 | Upper range, C–A | Q W E R T Y U I O P [ ] &#92; | 2 3 5 6 7 9 0 - = |
+
+The lower row continues through `/`: comma plays the next C, L plays C♯, period plays D, semicolon plays D♯, and slash plays E. These five notes overlap the start of the upper range; every physical key has only one assignment.
 
 Load the XML through **Edit → Keyboard Map → Load**, using the normal keyboard map rather than the raw map. Use English QWERTY without Shift. For a compact display, set **Preferences → Visualization → Number of keys** to **34** and **Starting Key** to **C**. Base Octave selects the playing register.
 

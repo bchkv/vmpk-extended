@@ -14,6 +14,11 @@
     <mapping key="N" note="9"/>
     <mapping key="J" note="10"/>
     <mapping key="M" note="11"/>
+    <mapping key="," note="12"/>
+    <mapping key="L" note="13"/>
+    <mapping key="." note="14"/>
+    <mapping key=";" note="15"/>
+    <mapping key="/" note="16"/>
     <mapping key="Q" note="12"/>
     <mapping key="2" note="13"/>
     <mapping key="W" note="14"/>
