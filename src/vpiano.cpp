@@ -26,6 +26,7 @@
 #include <QCloseEvent>
 #include <QComboBox>
 #include <QSlider>
+#include <QSignalBlocker>
 #include <QCheckBox>
 #include <QSpinBox>
 #include <QDial>
@@ -427,6 +428,27 @@ void VPiano::initToolBars()
     });
     connect(m_bender, &QAbstractSlider::sliderMoved, this, &VPiano::slotBenderSliderMoved);
     connect(m_bender, &QAbstractSlider::sliderReleased, this, &VPiano::slotBenderSliderReleased);
+    m_lblVolume = new QLabel(this);
+    m_lblVolume->setMargin(TOOLBARLABELMARGIN);
+    ui.toolBarBender->addWidget(m_lblVolume);
+    m_volume = new QSlider(Qt::Horizontal, this);
+    m_volume->setObjectName("channelVolume");
+    m_volume->setRange(0, 127);
+    m_volume->setMinimumWidth(100);
+    m_volume->setMaximumWidth(200);
+    m_volume->setFocusPolicy(Qt::NoFocus);
+    const int channel = VPianoSettings::instance()->channel();
+    const int volume = m_ctlState[channel].value(CTL_VOLUME, MIDIVOLUME);
+    m_ctlState[channel][CTL_VOLUME] = volume;
+    m_volume->setValue(volume);
+    m_volume->setToolTip(QString::number(volume));
+    ui.toolBarBender->addWidget(m_volume);
+    connect(m_volume, &QSlider::valueChanged, this, [this](int value) {
+        sendController(CTL_VOLUME, value);
+        updateController(CTL_VOLUME, value);
+        updateExtraController(CTL_VOLUME, value);
+        setWidgetTip(m_volume, value);
+    });
     // Programs tool bar
     m_lblBank = new QLabel(this);
     ui.toolBarPrograms->addWidget(m_lblBank);
@@ -1052,6 +1074,7 @@ void VPiano::initializeAllControllers()
 {
     int channel = VPianoSettings::instance()->channel();
     initControllers(channel);
+    updateExtraController(CTL_VOLUME, m_ctlState[channel].value(CTL_VOLUME, MIDIVOLUME));
     int index = m_comboControl->currentIndex();
     int ctl = m_comboControl->itemData(index).toInt();
     int val = m_ctlState[channel][ctl];
@@ -1602,6 +1625,7 @@ void VPiano::slotChannelValueChanged(const int channel)
             updateController(ctl, m_ctlState[baseChannel][ctl]);
             updateExtraController(ctl, m_ctlState[baseChannel][ctl]);
         }
+        updateExtraController(CTL_VOLUME, m_ctlState[baseChannel].value(CTL_VOLUME, MIDIVOLUME));
         updateBankChange(m_lastBank[baseChannel]);
         updateProgramChange(m_lastProg[baseChannel]);
         enforceMIDIChannelState();
@@ -1631,6 +1655,11 @@ void VPiano::updateController(int ctl, int val)
 
 void VPiano::updateExtraController(int ctl, int val)
 {
+    if (ctl == CTL_VOLUME && m_volume != nullptr) {
+        const QSignalBlocker blocker(m_volume);
+        m_volume->setValue(val);
+        m_volume->setToolTip(QString::number(val));
+    }
     QList<QWidget *> allWidgets = ui.toolBarExtra->findChildren<QWidget *>();
     foreach(QWidget *w, allWidgets) {
         QVariant p = w->property(MIDICTLNUMBER);
@@ -2202,6 +2231,8 @@ void VPiano::retranslateToolbars()
     );
     m_lblBank->setText(tr("Bank:"));
     m_lblBender->setText(tr("Bender:"));
+    m_lblVolume->setText(tr("Volume:"));
+    m_volume->setAccessibleName(tr("Channel volume"));
     m_holdBender->setText(tr("Hold"));
     m_holdBender->setToolTip(tr("Keep the pitch bend when released. Uncheck to return to centre."));
     m_lblControl->setText(tr("Control:"));

@@ -18,6 +18,10 @@ This can help match recordings that sit between standard pitches. The audible be
 
 Show the Pitch Bender toolbar from the **View** menu if it is hidden.
 
+### Channel volume slider
+
+A **Volume** slider sits after Hold in the Pitch Bender toolbar. It sends MIDI CC7 (0–127) on the selected channel without changing note velocity. It starts from the saved channel volume, or 100 when none is stored, and follows channel changes and controller updates. Channel volume is included in VMPK's existing saved controller settings.
+
 ### macOS QWERTY keyboard map
 
 [`data/macos-qwerty-2.75-octaves.xml`](data/macos-qwerty-2.75-octaves.xml) maps **39 unique keys** to a continuous range of **33 semitones (2.75 octaves)**, from C through A.

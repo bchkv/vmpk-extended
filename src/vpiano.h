@@ -264,6 +264,8 @@ private:
     QComboBox* m_comboControl;
     QDial* m_Control;
     QSlider* m_bender;
+    QSlider* m_volume = nullptr;
+    QLabel* m_lblVolume;
     QCheckBox* m_holdBender;
     QComboBox* m_comboBank;
     QComboBox* m_comboProg;
